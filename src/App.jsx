@@ -106,11 +106,15 @@ function PinScreen({onUnlock}) {
 /* ── NUM INPUT ── */
 function NumInput({value, onCommit, style}) {
   const [local, setLocal] = useState(value===0?"":String(value));
-  useEffect(()=>{ setLocal(value===0?"":String(value)); },[value]);
+  const focused = useRef(false);
+  useEffect(()=>{
+    if (!focused.current) setLocal(value===0?"":String(value));
+  },[value]);
   return (
     <input type="text" inputMode="decimal" value={local} placeholder="0"
       onChange={e=>setLocal(e.target.value)}
-      onBlur={()=>{ const n=parseFloat(local)||0; onCommit(n); setLocal(n===0?"":String(n)); }}
+      onFocus={()=>{ focused.current=true; }}
+      onBlur={()=>{ focused.current=false; const n=parseFloat(local)||0; onCommit(n); setLocal(n===0?"":String(n)); }}
       style={style}/>
   );
 }
