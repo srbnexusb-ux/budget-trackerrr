@@ -400,10 +400,10 @@ function AnnualSummaryTab({annualBudget,actuals,monthlyActualTotals,monthlyBudge
           </div>
         ))}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:14}}>
+      <div style={{display:"flex",flexDirection:"column",gap:12,marginBottom:14}}>
         <div style={card()}>
           <h3 style={{margin:"0 0 8px",fontSize:12,color:P.muted,fontWeight:600}}>📊 BUDGET VS ACTUAL</h3>
-          <ResponsiveContainer width="100%" height={195}>
+          <ResponsiveContainer width="100%" height={260}>
             <BarChart data={ytdData} margin={{top:5,right:5,left:0,bottom:0}}>
               <CartesianGrid strokeDasharray="3 3" stroke={P.border}/>
               <XAxis dataKey="month" tick={{fill:P.muted,fontSize:9}}/>
@@ -420,7 +420,7 @@ function AnnualSummaryTab({annualBudget,actuals,monthlyActualTotals,monthlyBudge
         <div style={card()}>
           <h3 style={{margin:"0 0 8px",fontSize:12,color:P.muted,fontWeight:600}}>🥧 SPENDING BY GROUP</h3>
           {groupTotals.length>0?(
-            <ResponsiveContainer width="100%" height={195}>
+            <ResponsiveContainer width="100%" height={280}>
               <PieChart>
                 <Pie data={groupTotals} cx="50%" cy="50%" outerRadius={72} dataKey="value" label={({name,percent})=>`${name} ${(percent*100).toFixed(0)}%`} labelLine={false} fontSize={8}>
                   {groupTotals.map((_,i)=><Cell key={i} fill={CHART_COLORS[i%CHART_COLORS.length]}/>)}
@@ -574,10 +574,10 @@ function MonthTab({month,monthFull,annualBudget,actuals,updateActualSimple,addTr
           </div>
         ))}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
+      <div style={{display:"flex",flexDirection:"column",gap:12,marginBottom:16}}>
         <div style={card()}>
           <h3 style={{margin:"0 0 8px",fontSize:12,color:P.muted,fontWeight:600}}>📊 BUDGET VS ACTUAL</h3>
-          <ResponsiveContainer width="100%" height={185}>
+          <ResponsiveContainer width="100%" height={260}>
             <BarChart data={vsData} margin={{top:5,right:5,left:0,bottom:0}}>
               <CartesianGrid strokeDasharray="3 3" stroke={P.border}/>
               <XAxis dataKey="name" tick={{fill:P.muted,fontSize:10}}/>
@@ -592,7 +592,7 @@ function MonthTab({month,monthFull,annualBudget,actuals,updateActualSimple,addTr
         <div style={card()}>
           <h3 style={{margin:"0 0 8px",fontSize:12,color:P.muted,fontWeight:600}}>🥧 SPENDING</h3>
           {pieData.length>0?(
-            <ResponsiveContainer width="100%" height={185}>
+            <ResponsiveContainer width="100%" height={280}>
               <PieChart>
                 <Pie data={pieData} cx="50%" cy="50%" outerRadius={68} dataKey="value" label={({name,percent})=>`${name} ${(percent*100).toFixed(0)}%`} labelLine={false} fontSize={8}>
                   {pieData.map((_,i)=><Cell key={i} fill={CHART_COLORS[i%CHART_COLORS.length]}/>)}
